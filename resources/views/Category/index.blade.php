@@ -16,6 +16,7 @@
         <tr>
           <th>Nama</th>
           <th>Deskripsi</th>
+          <th>Obat-Obat</th>
         </tr>
       </thead>
       <tbody>
@@ -23,6 +24,12 @@
         <tr>
           <td>{{$d->name}}</td>
           <td>{{$d->description}}</td>
+          <td>
+            @foreach($d->medicines as $m)
+                {{$m->generic_name}} ({{$m->form}})<br>
+            @endforeach
+        </td>
+
         </tr>
         @endforeach
       </tbody>

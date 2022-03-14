@@ -21,3 +21,4 @@ Route::resource('medicines','MedicineController');
 
 Route::resource('categories','CategoryController');
 
+Route::get('coba1','MedicineController@coba1');
