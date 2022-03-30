@@ -15,14 +15,17 @@ class CategoryController extends Controller
      */
     public function index()
     {
+        //Menggunakan Raw Query
         // $queryRaw = DB::select(DB::raw("select * from categories"));
 
-        $queryBuilder = DB::table('categories')->get();
+        //Menggunakan QueryBuilder
+        // $queryBuilder = DB::table('categories')->get();
 
-        // $queryModel = Categories::all();
+        //Menggunakan Eloquent Model
+        $queryEloquent = Category::all();
 
         // dd($queryRaw);
-        return view('category.index',compact('queryBuilder'));
+        return view('category.index',compact('queryEloquent'));
     }
 
     /**
@@ -89,5 +92,16 @@ class CategoryController extends Controller
     public function destroy(Category $category)
     {
         //
+    }
+
+    public function showlist($id_category)
+    {
+        $data=Category::find($id_category);
+        $namecategory=$data->name;
+        $result=$data->medicines;
+        if($result) $getTotalData=$result->count();
+          else  $getTotalData=0;
+        return view('report.list_medicines_by_category',
+          compact('id_category','namecategory','result','getTotalData'));       
     }
 }
